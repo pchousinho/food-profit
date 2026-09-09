@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 -- CREATE DATE - Junho 2026
--- DESCRIPTION - Sequence for table CATEGORIAS
+-- DESCRIPTION - Sequence for table PRODUCT_SKU
 -------------------------------------------------------------------------------
-CREATE SEQUENCE SEQ_CATEGORIAS
+CREATE SEQUENCE SEQ_PRODUCT_SKU
    MINVALUE 1
    MAXVALUE 9999999999
    INCREMENT BY 1

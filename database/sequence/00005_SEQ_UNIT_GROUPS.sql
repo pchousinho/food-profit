@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 -- CREATE DATE - Junho 2026
--- DESCRIPTION - Sequence for table USUARIOS
+-- DESCRIPTION - Sequence for table UNIT_GROUPS
 -------------------------------------------------------------------------------
-CREATE SEQUENCE SEQ_USUARIOS
+CREATE SEQUENCE SEQ_UNIT_GROUPS
    MINVALUE 1
    MAXVALUE 9999999999
    INCREMENT BY 1

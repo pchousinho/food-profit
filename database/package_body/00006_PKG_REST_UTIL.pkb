@@ -4,7 +4,7 @@ CREATE OR REPLACE PACKAGE BODY PKG_REST_UTIL AS
    -- DESCRIPTION - Function that performs a REST API request using the given
    --               URL, HTTP method, request body, and headers.
    ----------------------------------------------------------------------------
-   FUNCTION make_rest_request(o_error_message     OUT logs.backtrace%TYPE
+   FUNCTION make_rest_request(o_error_message     OUT logs.error_backtrace%TYPE
                              ,o_status_code       OUT NUMBER
                              ,o_result_content    OUT CLOB
                              ,i_debug_mode     IN     BOOLEAN DEFAULT FALSE
@@ -27,13 +27,13 @@ CREATE OR REPLACE PACKAGE BODY PKG_REST_UTIL AS
       -- Validate input parameters
       IF i_url IS NULL
       THEN
-         o_error_message := pkg_log.get_message_text(i_key => apo_rms_e_common_err.err$invalid_parameter, i_txt_1 => 'i_url');
+         o_error_message := pkg_common_utils.get_message_text(i_message_key => pkg_common_err.err$invalid_parameter, i_txt_1 => 'i_url');
          RAISE l_custom_exception;
       END IF;
       --
       IF i_http_method IS NULL
       THEN
-         o_error_message := pkg_log.get_message_text(i_key => apo_rms_e_common_err.err$invalid_parameter, i_txt_1 => 'i_http_method');
+         o_error_message := pkg_common_utils.get_message_text(i_message_key => pkg_common_err.err$invalid_parameter, i_txt_1 => 'i_http_method');
          RAISE l_custom_exception;
       END IF;
       --
@@ -53,6 +53,7 @@ CREATE OR REPLACE PACKAGE BODY PKG_REST_UTIL AS
         ,p_http_method => i_http_method
         ,p_body        => i_body
       );
+      --
       IF i_debug_mode
       THEN
          dbms_output.put_line('status_code:' || apex_web_service.g_status_code);
@@ -68,13 +69,13 @@ CREATE OR REPLACE PACKAGE BODY PKG_REST_UTIL AS
    EXCEPTION
       WHEN l_custom_exception
       THEN
-         o_error_message := pkg_log.get_message_text(i_key => apo_rms_e_common_err.err$make_rest_request);
-         o_status_code := NVL(apex_web_service.g_status_code, g_status_code_bad_request);
+         o_error_message := pkg_common_utils.get_message_text(i_message_key => pkg_common_err.err$make_rest_request);
+         o_status_code := NVL(apex_web_service.g_status_code, PKG_COMMON_GV.g_status_code_bad_request);
          RETURN FALSE;
       WHEN OTHERS
       THEN
-         o_error_message := pkg_log.get_message_text(i_key => apo_rms_e_common_err.err$make_rest_request);
-         o_status_code := NVL(apex_web_service.g_status_code, g_status_code_internal_error);
+         o_error_message := pkg_common_utils.get_message_text(i_message_key => pkg_common_err.err$make_rest_request);
+         o_status_code := NVL(apex_web_service.g_status_code, PKG_COMMON_GV.g_status_code_internal_error);
          RETURN FALSE;
    END make_rest_request;
 

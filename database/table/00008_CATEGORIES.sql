@@ -29,7 +29,7 @@ COMMENT ON COLUMN CATEGORIES.ID               IS 'This field contains the primar
 COMMENT ON COLUMN CATEGORIES.CLIENT_ID        IS 'This field contains the foreign key to the CLIENTS table';
 COMMENT ON COLUMN CATEGORIES.DESCRIPTION      IS 'This field contains the description of the category';
 COMMENT ON COLUMN CATEGORIES.SUMMARY          IS 'This field contains the summary of the category';
-COMMENT ON COLUMN CATEGORIES.BACKGROUND_COLOR IS 'This field contains the background color of the category';
+COMMENT ON COLUMN CATEGORIES.BG_COLOR         IS 'This field contains the background color of the category';
 COMMENT ON COLUMN CATEGORIES.ICON             IS 'This field contains the icon of the category';
 COMMENT ON COLUMN CATEGORIES.STATUS           IS 'This field contains the current status (A - Active, I - Inactive)';
 COMMENT ON COLUMN CATEGORIES.CREATED_BY       IS 'This field contains the user who created the record';
